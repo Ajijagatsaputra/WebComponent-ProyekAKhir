@@ -144,3 +144,14 @@ footer {
     bottom: 0;
     position: fixed; /* agar footer selalu di bagian bawah layar */
 }
+
+/* Media query untuk perangkat mobile */
+@media only screen and (max-width: 600px) {
+    .item-card {
+        width: 95%; /* Lebar kartu item menjadi 95% pada perangkat mobile */
+    }
+
+    .input-card {
+        width: 90%; /* Lebar input form menjadi 90% pada perangkat mobile */
+    }
+}

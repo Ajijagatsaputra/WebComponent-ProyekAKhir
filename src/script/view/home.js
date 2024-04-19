@@ -23,7 +23,7 @@ function displayNotes() {
     });
 }
 
-document.getElementById("formNote").addEventListener("submit", function(event) {
+document.getElementById("formNote").addEventListener("submit",async function(event) {
     event.preventDefault();
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
@@ -34,7 +34,7 @@ document.getElementById("formNote").addEventListener("submit", function(event) {
             title: title,
             description: description
         };
-        addNote(newNote);
+        await addNote(newNote);
         displayNotes();
         document.getElementById("formNote").reset();
     } else {
@@ -42,12 +42,12 @@ document.getElementById("formNote").addEventListener("submit", function(event) {
     }
 });
 
-displayNotes();
-
-document.getElementById("noteList").addEventListener("click", (event) => {
+document.getElementById("noteList").addEventListener("click",async (event) => {
     if (event.target.classList.contains("delete-button")) {
         const noteId = event.target.parentElement.getAttribute("data-note-id");
-        deleteNote(noteId);
+        await deleteNote(noteId);
         displayNotes();
     }
 });
+
+displayNotes();
