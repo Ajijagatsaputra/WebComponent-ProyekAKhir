@@ -1,48 +1,97 @@
 class Loading extends HTMLElement {
     constructor() {
-        super();
-        this._shadowRoot = this.attachShadow({ mode: "open" });
-        this._shadowRoot.innerHTML = `
-            <style>
-                #loadingIndicator {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(255, 255, 255, 0.5); /* Transparan */
-                    z-index: 9999; /* Pastikan indikator loading muncul di atas konten */
+      super();
+      this._shadowRoot = this.attachShadow({ mode: "open" });
+      this._shadowRoot.innerHTML = `
+              <style>
+              .lds-spinner,
+              .lds-spinner div,
+              .lds-spinner div:after {
+                box-sizing: border-box;
+              }
+              .lds-spinner {
+                color: currentColor;
+                display: inline-block;
+                position: relative;
+                width: 80px;
+                height: 80px;
+              }
+              .lds-spinner div {
+                transform-origin: 40px 40px;
+                animation: lds-spinner 1.2s linear infinite;
+              }
+              .lds-spinner div:after {
+                content: " ";
+                display: block;
+                position: absolute;
+                top: 3.2px;
+                left: 36.8px;
+                width: 6.4px;
+                height: 17.6px;
+                border-radius: 20%;
+                background: currentColor;
+              }
+              .lds-spinner div:nth-child(1) {
+                transform: rotate(0deg);
+                animation-delay: -1.1s;
+              }
+              .lds-spinner div:nth-child(2) {
+                transform: rotate(30deg);
+                animation-delay: -1s;
+              }
+              .lds-spinner div:nth-child(3) {
+                transform: rotate(60deg);
+                animation-delay: -0.9s;
+              }
+              .lds-spinner div:nth-child(4) {
+                transform: rotate(90deg);
+                animation-delay: -0.8s;
+              }
+              .lds-spinner div:nth-child(5) {
+                transform: rotate(120deg);
+                animation-delay: -0.7s;
+              }
+              .lds-spinner div:nth-child(6) {
+                transform: rotate(150deg);
+                animation-delay: -0.6s;
+              }
+              .lds-spinner div:nth-child(7) {
+                transform: rotate(180deg);
+                animation-delay: -0.5s;
+              }
+              .lds-spinner div:nth-child(8) {
+                transform: rotate(210deg);
+                animation-delay: -0.4s;
+              }
+              .lds-spinner div:nth-child(9) {
+                transform: rotate(240deg);
+                animation-delay: -0.3s;
+              }
+              .lds-spinner div:nth-child(10) {
+                transform: rotate(270deg);
+                animation-delay: -0.2s;
+              }
+              .lds-spinner div:nth-child(11) {
+                transform: rotate(300deg);
+                animation-delay: -0.1s;
+              }
+              .lds-spinner div:nth-child(12) {
+                transform: rotate(330deg);
+                animation-delay: 0s;
+              }
+              @keyframes lds-spinner {
+                0% {
+                  opacity: 1;
                 }
-                
-                .loading-spinner {
-                    border: 4px solid rgba(0, 0, 0, 0.3); /* Warna border */
-                    border-top: 4px solid #007bff; /* Warna border bagian atas */
-                    border-radius: 50%; /* Membuat bentuk lingkaran */
-                    width: 40px; /* Lebar lingkaran */
-                    height: 40px; /* Tinggi lingkaran */
-                    animation: spin 1s linear infinite; /* Animasi putar */
+                100% {
+                  opacity: 0;
                 }
-                
-                @keyframes spin {
-                    0% { transform: rotate(0deg); } /* Rotasi awal */
-                    100% { transform: rotate(360deg); } /* Rotasi setelah satu putaran penuh */
-                }
-                
-                .loading-text {
-                    margin-left: 10px; /* Jarak antara ikon loading dan teks */
-                    font-size: 16px; /* Ukuran teks */
-                    color: #333; /* Warna teks */
-                }
-            </style>
-            <div id="loadingIndicator" style="display: none;">
-                <div class="loading-spinner"></div>
-                <div class="loading-text">Loading...</div>
-            </div>
-        `;
+              }
+              </style>
+              <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          `;
     }
-}
-
-customElements.define("loading-indicator", Loading);
+  }
+  
+  customElements.define("loading-indicator", Loading);
+  

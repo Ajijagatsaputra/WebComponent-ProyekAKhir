@@ -1,4 +1,4 @@
-const BASE_URL = "https://notes-api.dicoding.dev/v2/#/";
+const BASE_URL = "https://notes-api.dicoding.dev/v2/";
 
 class NoteApi {
   static async fetchNotes() {
@@ -7,7 +7,7 @@ class NoteApi {
       if (!response.ok) {
         throw new Error("Failed to fetch notes");
       }
-      const data = await response.json();
+      const { data } = await response.json();
       return data;
     } catch (error) {
       console.error("Error fetching notes:", error);
@@ -70,32 +70,4 @@ class NoteApi {
   }
 }
 
-// Contoh penggunaan
-(async () => {
-  try {
-    const notes = await NoteApi.fetchNotes();
-    console.log("Fetched notes:", notes);
-
-    const newNote = {
-      title: "New Note",
-      content: "This is a new note",
-    };
-    const addedNote = await NoteApi.addNote(newNote);
-    console.log("Added note:", addedNote);
-
-    const updatedNote = {
-      title: "Updated Note",
-      content: "This is an updated note",
-    };
-    const updatedNoteResponse = await NoteApi.updateNote(
-      addedNote.id,
-      updatedNote
-    );
-    console.log("Updated note:", updatedNoteResponse);
-
-    await NoteApi.deleteNote(addedNote.id);
-    console.log("Note deleted successfully");
-  } catch (error) {
-    console.error("Error:", error);
-  }
-})();
+export default NoteApi;

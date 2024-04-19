@@ -1,11 +1,10 @@
-import '../data/API/note-api.js';
-import { fetchNotes as fetchNotesFromAPI, addNote, deleteNote } from '../data/API/note-api.js'; // Menggunakan alias fetchNotesFromAPI untuk menghindari konflik
+import NoteApi from "../data/API/note-api";
 
-function displayNotes() {
+async function displayNotes() {
     const noteList = document.getElementById("noteList");
     noteList.innerHTML = "";
     
-    const notes = fetchNotesFromAPI(); // Menggunakan fetchNotes dari impor
+    const notes = await NoteApi.fetchNotes();
     notes.forEach((note) => {
         const noteElement = document.createElement("div");
         noteElement.classList.add("note-item");
@@ -30,12 +29,12 @@ document.getElementById("formNote").addEventListener("submit",async function(eve
     
     if (title && description) {
         const newNote = {
-            id: `note-${Math.random().toString(36).substr(2, 9)}`,
+
             title: title,
-            description: description
+            body: description
         };
-        await addNote(newNote);
-        displayNotes();
+        await NoteApi.addNote(newNote);
+        await displayNotes();
         document.getElementById("formNote").reset();
     } else {
         alert("Judul dan catatan tidak boleh kosong!");
@@ -45,8 +44,8 @@ document.getElementById("formNote").addEventListener("submit",async function(eve
 document.getElementById("noteList").addEventListener("click",async (event) => {
     if (event.target.classList.contains("delete-button")) {
         const noteId = event.target.parentElement.getAttribute("data-note-id");
-        await deleteNote(noteId);
-        displayNotes();
+        await NoteApi.deleteNote(noteId);
+        await displayNotes();
     }
 });
 
