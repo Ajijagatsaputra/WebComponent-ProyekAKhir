@@ -1,11 +1,11 @@
-import '../data/noteData.js';
-import { getNotes, addNote, deleteNote } from '../data/noteData.js';
+import '../data/API/note-api.js';
+import { fetchNotes as fetchNotesFromAPI, addNote, deleteNote } from '../data/API/note-api.js'; // Menggunakan alias fetchNotesFromAPI untuk menghindari konflik
 
 function displayNotes() {
     const noteList = document.getElementById("noteList");
     noteList.innerHTML = "";
     
-    const notes = getNotes();
+    const notes = fetchNotesFromAPI(); // Menggunakan fetchNotes dari impor
     notes.forEach((note) => {
         const noteElement = document.createElement("div");
         noteElement.classList.add("note-item");
