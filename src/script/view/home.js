@@ -2,6 +2,9 @@ import NoteApi from "../data/API/note-api";
 
 async function displayNotes() {
     const noteList = document.getElementById("noteList");
+    const loadingIndicator = document.querySelector("loading-indicator");
+    loadingIndicator.style.display = "block;"
+    
     noteList.innerHTML = "";
     
     const notes = await NoteApi.fetchNotes();
@@ -20,6 +23,8 @@ async function displayNotes() {
         `;
         noteList.appendChild(noteElement);
     });
+
+    loadingIndicator.style.display = "none";
 }
 
 document.getElementById("formNote").addEventListener("submit",async function(event) {
